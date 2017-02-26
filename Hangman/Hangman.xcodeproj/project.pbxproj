@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B754C511E61C02200538228 /* StringIndexing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B754C501E61C02200538228 /* StringIndexing.swift */; };
 		ECC22F431C89177600749E58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC22F421C89177600749E58 /* AppDelegate.swift */; };
 		ECC22F481C89177600749E58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECC22F461C89177600749E58 /* Main.storyboard */; };
 		ECC22F4A1C89177600749E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC22F491C89177600749E58 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B754C501E61C02200538228 /* StringIndexing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringIndexing.swift; sourceTree = SOURCE_ROOT; };
 		ECC22F3F1C89177600749E58 /* Hangman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hangman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECC22F421C89177600749E58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECC22F471C89177600749E58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B754C4F1E61BFDC00538228 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0B754C501E61C02200538228 /* StringIndexing.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		6CAA6A4C1E2B1CCA009392E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 		ECC22F411C89177600749E58 /* Hangman */ = {
 			isa = PBXGroup;
 			children = (
+				0B754C4F1E61BFDC00538228 /* Extensions */,
 				ECC22F741C8917FF00749E58 /* Model */,
 				ECC22F731C8917DC00749E58 /* View */,
 				ECC22F721C8917D300749E58 /* Controller */,
@@ -298,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B754C511E61C02200538228 /* StringIndexing.swift in Sources */,
 				ECC22F711C8917C200749E58 /* HangmanViewController.swift in Sources */,
 				ECC22F431C89177600749E58 /* AppDelegate.swift in Sources */,
 				ECC22F7E1C891CF800749E58 /* HangmanPhrases.swift in Sources */,
