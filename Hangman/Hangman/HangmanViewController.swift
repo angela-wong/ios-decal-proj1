@@ -20,16 +20,12 @@ class HangmanViewController: UIViewController {
     var finalPhrase : String = ""
     var incorrectList = [String]()
     var numWrong = 0
-    var lettersCorrect = 0
-    var phraseLength = 0
     
     @IBAction func newGame(_ sender: UIButton) {
         phraseSoFar = ""
         finalPhrase = ""
         incorrectList = [String]()
         numWrong = 0
-        lettersCorrect = 0
-        phraseLength = 0
         guessButton.isUserInteractionEnabled = true
         incorrectGuesses.text = ""
         viewDidLoad()
@@ -48,7 +44,6 @@ class HangmanViewController: UIViewController {
                 phraseSoFar += "  "
             } else {
                 phraseSoFar += "_ "
-                phraseLength += 1
             }
         }
         phraseProgress.text = phraseSoFar
@@ -96,8 +91,6 @@ class HangmanViewController: UIViewController {
     
     @IBAction func guess(_ sender: UIButton) {
         if let guess = inputText.text {
-            //if length(inputText.text != 1)
-            //check that the letter hasnt already been guessed
             if guess.characters.count == 1 {
                 var correct : Bool = false
                 var chars = Array(phraseSoFar.characters)
@@ -107,7 +100,6 @@ class HangmanViewController: UIViewController {
                 for i in 0..<finalPhrase.characters.count {
                     if finalPhrase.substring(atIndex: i) == guess.uppercased() {
                         chars[2*i] = Character(finalPhrase.substring(atIndex: i))
-                        lettersCorrect += 1
                         correct = true
                     }
                 }
@@ -120,7 +112,7 @@ class HangmanViewController: UIViewController {
                 } else {
                     phraseSoFar = String(chars)
                     phraseProgress.text = phraseSoFar
-                    if lettersCorrect == phraseLength {
+                    if !chars.contains("_") {
                         guessButton.isUserInteractionEnabled = false
                         let alert = UIAlertController(title: "Congratulations!", message: "You've won the game!", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
