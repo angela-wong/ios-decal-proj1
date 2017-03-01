@@ -26,7 +26,7 @@ class HangmanViewController: UIViewController {
         finalPhrase = ""
         incorrectList = [String]()
         numWrong = 0
-        guessButton.isUserInteractionEnabled = true
+        
         incorrectGuesses.text = ""
         viewDidLoad()
     }
@@ -48,6 +48,13 @@ class HangmanViewController: UIViewController {
         }
         phraseProgress.text = phraseSoFar
         hangmanImage.image = UIImage(named: "hangman1")
+        for i in 1..<27 {
+            let button = self.view.viewWithTag(i) as! UIButton
+            button.isUserInteractionEnabled = true
+            button.tintColor = UIColor(red:102/255, green:102/255, blue:255/255, alpha:1.0)
+            //button.titleLabel!.textColor = UIColor(red:102/255, green:102/255, blue:255/255, alpha:1.0)
+            //button.setTitleColor(UIColor(red:102/255, green:102/255, blue:255/255, alpha:1.0), for: .normal)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,7 +86,13 @@ class HangmanViewController: UIViewController {
             hangmanImage.image = UIImage(named: "hangman6")
         } else {
             hangmanImage.image = UIImage(named: "hangman7")
-            guessButton.isUserInteractionEnabled = false
+            for i in 1..<27 {
+                let button = self.view.viewWithTag(i) as! UIButton
+                button.isUserInteractionEnabled = false
+                button.tintColor = UIColor.gray
+                //button.titleLabel!.textColor = UIColor.gray
+                //button.setTitleColor(UIColor.gray, for: .normal)
+            }
             let alert = UIAlertController(title: "Sorry!", message: "You've lost the game. Play again!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true)
@@ -87,42 +100,48 @@ class HangmanViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var guessButton: UIButton!
+    @IBOutlet weak var letterButtons: UIButton!
     
-    @IBAction func guess(_ sender: UIButton) {
-        if let guess = inputText.text {
-            if guess.characters.count == 1 {
-                var correct : Bool = false
-                var chars = Array(phraseSoFar.characters)
-                if chars.contains(Character(guess)) || incorrectList.contains(guess) {
-                    return
+    @IBAction func letterWasPressed(_ sender: UIButton) {
+        let tag = sender.tag
+        if let letterVal = UnicodeScalar(96 + tag) {
+            let guess = String(letterVal)
+            var correct : Bool = false
+            var chars = Array(phraseSoFar.characters)
+            if chars.contains(Character(guess)) || incorrectList.contains(guess) {
+                return
+            }
+            for i in 0..<finalPhrase.characters.count {
+                if finalPhrase.substring(atIndex: i) == guess.uppercased() {
+                    chars[2*i] = Character(finalPhrase.substring(atIndex: i))
+                    correct = true
                 }
-                for i in 0..<finalPhrase.characters.count {
-                    if finalPhrase.substring(atIndex: i) == guess.uppercased() {
-                        chars[2*i] = Character(finalPhrase.substring(atIndex: i))
-                        correct = true
-                    }
-                }
-                if !correct {
-                    incorrectList.append(guess)
-                    incorrectGuesses.text = incorrectList.joined(separator: " ")
-                    numWrong += 1
-                    updateImage()
+            }
+            let button = self.view.viewWithTag(tag) as! UIButton
+            button.isUserInteractionEnabled = false
+            button.tintColor = UIColor.gray
+            if !correct {
+                incorrectList.append(guess)
+                incorrectGuesses.text = incorrectList.joined(separator: " ")
+                numWrong += 1
+                updateImage()
 
-                } else {
-                    phraseSoFar = String(chars)
-                    phraseProgress.text = phraseSoFar
-                    if !chars.contains("_") {
-                        guessButton.isUserInteractionEnabled = false
-                        let alert = UIAlertController(title: "Congratulations!", message: "You've won the game!", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true)
+            } else {
+                phraseSoFar = String(chars)
+                phraseProgress.text = phraseSoFar
+                if !chars.contains("_") {
+                    for i in 1..<27 {
+                        let button = self.view.viewWithTag(i) as! UIButton
+                        button.isUserInteractionEnabled = false
+                        button.tintColor = UIColor.gray
+                        //button.setTitleColor(UIColor.gray, for: .normal)
                     }
+                    let alert = UIAlertController(title: "Congratulations!", message: "You've won the game!", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true)
                 }
             }
         }
     }
-    
-  
-    @IBOutlet weak var inputText: UITextField!
+
 }
