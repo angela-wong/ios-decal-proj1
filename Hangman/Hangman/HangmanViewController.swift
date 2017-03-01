@@ -52,8 +52,6 @@ class HangmanViewController: UIViewController {
             let button = self.view.viewWithTag(i) as! UIButton
             button.isUserInteractionEnabled = true
             button.tintColor = UIColor(red:102/255, green:102/255, blue:255/255, alpha:1.0)
-            //button.titleLabel!.textColor = UIColor(red:102/255, green:102/255, blue:255/255, alpha:1.0)
-            //button.setTitleColor(UIColor(red:102/255, green:102/255, blue:255/255, alpha:1.0), for: .normal)
         }
     }
 
@@ -90,8 +88,6 @@ class HangmanViewController: UIViewController {
                 let button = self.view.viewWithTag(i) as! UIButton
                 button.isUserInteractionEnabled = false
                 button.tintColor = UIColor.gray
-                //button.titleLabel!.textColor = UIColor.gray
-                //button.setTitleColor(UIColor.gray, for: .normal)
             }
             let alert = UIAlertController(title: "Sorry!", message: "You've lost the game. Play again!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -134,7 +130,6 @@ class HangmanViewController: UIViewController {
                         let button = self.view.viewWithTag(i) as! UIButton
                         button.isUserInteractionEnabled = false
                         button.tintColor = UIColor.gray
-                        //button.setTitleColor(UIColor.gray, for: .normal)
                     }
                     let alert = UIAlertController(title: "Congratulations!", message: "You've won the game!", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
